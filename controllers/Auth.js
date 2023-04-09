@@ -1,3 +1,4 @@
+const Admin = require("../model/Admin");
 const User = require("../model/User");
 
 const register = async (req, res) => {
@@ -49,6 +50,22 @@ const login = async (req, res) => {
     res.send("Invalid Credentials");
   }
   const token = user.createJWT();
+  const id = user._id;
+
+  const isAdmin = await Admin.find({userID: id})
+  
+  if(isAdmin.length === 0 || !isAdmin){
+    res.status(200).json({
+      userdetails: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        citizenshipNumber: user.citizenshipNumber,
+      },
+      token,
+      role: 'user'
+    });
+  }
   res.status(200).json({
     userdetails: {
       id: user._id,
@@ -57,6 +74,7 @@ const login = async (req, res) => {
       citizenshipNumber: user.citizenshipNumber,
     },
     token,
+    role: 'admin'
   });
 };
 

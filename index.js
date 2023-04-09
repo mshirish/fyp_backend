@@ -12,6 +12,7 @@ app.use(express.json());
 
 
 //routes
+const electionRouter = require("./routes/Elections.js")
 const authRouter = require("./routes/Auth")
 const adminRouter = require("./routes/Admin")
 const noticeRouter = require('./routes/Notice')
@@ -24,6 +25,7 @@ app.use('/api/admin',authenticateUser, isAdmin ,adminRouter)
 app.use('/api/notices',authenticateUser,noticeRouter)
 app.use('/api/ballot',authenticateUser,ballotRouter)
 app.use('/api/candidates',authenticateUser, candidateRouter)
+app.use('/api/elections', electionRouter)
 // app.use('/api/notices', authenticateUser, noticeRouter)
 
 

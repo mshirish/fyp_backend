@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const CandidcateSchema = new mongoose.Schema({
     partyName:{
         type:String,
-        required:true
+        required:true 
     },
     partyLogo:{
         type:String

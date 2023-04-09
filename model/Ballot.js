@@ -3,7 +3,11 @@ const User = require("./User");
 
 const BallotSchema = new mongoose.Schema(
   {
-
+    electionId:{
+      type: mongoose.Types.ObjectId,
+      ref: 'Election',
+      required:true
+    },
     mayor:{
       type:String,
       required:true
